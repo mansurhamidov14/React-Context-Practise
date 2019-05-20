@@ -70,6 +70,15 @@ const ThemeTogglerButton = () => {
     )
 };
 
+class ButtonRepresent extends React.Component {
+    static contextType = ThemeContext;
+
+    render () {
+        console.log(this.context);
+        return <div style={{background: this.context.theme.background, color: this.context.theme.color, padding: '15px 15px'}}>This block represents app theme</div>
+    }
+}
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -79,13 +88,13 @@ class App extends React.Component {
             }))
         };
         this.state = {
-            theme: themes.light,
+            theme: themes.dark,
             toggleTheme: this.toggleTheme
         }
     }
 
     render () {
-        return <ThemeContext.Provider value={this.state}><Content/></ThemeContext.Provider>
+        return <ThemeContext.Provider value={this.state}><Content/><ButtonRepresent/></ThemeContext.Provider>
     }
 }
 
